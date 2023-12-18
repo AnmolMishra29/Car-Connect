@@ -1,15 +1,16 @@
 package dao;
 import entity.Vehicle;
+import exception.VehicleNotFoundException;
 
 public interface IVehicleService {
 
-	Vehicle getVehiclebyId(int vehicleId);
+	Vehicle getVehiclebyId(int vehicleId) throws VehicleNotFoundException;
 
-	Vehicle getAvailableVehicles();
+	//boolean getAvailableVehicles();
 
 	boolean addVehicle(Vehicle vehicle);
 
-	Vehicle updateVehicle(Vehicle vehicle);
+	//boolean updateVehicle(Vehicle vehicle);
 
 	boolean removeVehicle(int vehicleId);
 

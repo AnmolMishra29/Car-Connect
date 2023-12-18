@@ -6,59 +6,59 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import exception.CustomerNotFoundException;
+import util.DButil;
 
 public class CustomerService implements ICustomerService {
-
-    private static final String SELECT_CUSTOMER_BY_ID = "SELECT * FROM customer WHERE adminId=?";
-    private static final String SELECT_CUSTOMER_BY_USERNAME = "SELECT * FROM customer WHERE username=?";
-    private static final String INSERT_CUSTOMER = "INSERT INTO customer(customerId,firstname,lastname,email,contact,address,username, password,registrationDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
     //private static final String UPDATE_CUSTOMER = "UPDATE users SET username=?, password=? WHERE adminId=?";
-    private static final String DELETE_CUSTOMER = "DELETE FROM customer WHERE customerId=?";
-
-    private final Connection connection;
-    //private int adminId;
-
-     public CustomerService(Connection connection) {
-        this.connection = connection;
-    }
-
-    public CustomerService() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
+    
 	@Override
-	public Customer getCustomerById(int customerId) {
+	public Customer getCustomerById(int customerId) throws CustomerNotFoundException{
+            try(Connection connection = DButil.getConnection()){
+              String SELECT_CUSTOMER_BY_ID = "SELECT * FROM customer WHERE adminId=?";  
 	    try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CUSTOMER_BY_ID)) {
             preparedStatement.setInt(1, customerId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     return mapResultSetToCustomer(resultSet);
-                }
+                }else{
+                       throw new CustomerNotFoundException("Customer with ID " + customerId + " not found");
+                   }
+            }
             }
         } catch (SQLException e) {
-            // Handle exceptions (log, throw custom exceptions, etc.)
             e.printStackTrace();
+            throw new RuntimeException("An error occurred while retrieving vehicle from the database.", e);
         }
-		return null;
 	}
 
 	@Override
-	public Customer getCustomerByUsername(String username) {
+	public Customer getCustomerByUsername(String username) throws CustomerNotFoundException {
+            try(Connection connection = DButil.getConnection()){
+               String SELECT_CUSTOMER_BY_USERNAME = "SELECT * FROM customer WHERE username=?";
+            
 	    try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CUSTOMER_BY_USERNAME)) {
             preparedStatement.setString(1, username);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     return mapResultSetToCustomer(resultSet);
-                }
+                }else{
+                       throw new CustomerNotFoundException("Customer with Username " + username + " not found");
+                   }
+            }
             }
         } catch (SQLException e) {
-            // Handle exceptions (log, throw custom exceptions, etc.)
             e.printStackTrace();
+            throw new RuntimeException("An error occurred while retrieving customer from the database.", e);
         }
-		return null;
 	}
 
 	@Override
 	public boolean registerCustomer(Customer customer) {
+            try(Connection connection = DButil.getConnection()){
+               String INSERT_CUSTOMER = "INSERT INTO customer(customerId,firstname,lastname,email,contact,address,username, password,registrationDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
             try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CUSTOMER)) {
             preparedStatement.setInt(1, customer.getCustomerID());
             preparedStatement.setString(2, customer.getFirstName());
@@ -73,27 +73,32 @@ public class CustomerService implements ICustomerService {
             
             int rowsAffected = preparedStatement.executeUpdate();
             return rowsAffected > 0;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
 	}
 
-	@Override
-	public Customer updateCustomer(Customer customerData) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public boolean updateCustomer(Customer customerData) {
+//                System.out.println("Updated Successfully");
+//		return false;
+//	}
 
 	
         @Override
 	public boolean deleteCustomer(int customerId) {
+            try(Connection connection = DButil.getConnection()){
+               String DELETE_CUSTOMER = "DELETE FROM customer WHERE customerId=?"; 
+            
             try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE_CUSTOMER)) {
             preparedStatement.setInt(1, customerId);
             preparedStatement.executeUpdate();
             
             int rowsAffected = preparedStatement.executeUpdate();
                 return rowsAffected > 0;
+            }
         } catch (SQLException e) {
             // Handle exceptions
             e.printStackTrace();
@@ -114,5 +119,4 @@ public class CustomerService implements ICustomerService {
         customer.setRegistrationDate(resultSet.getString("registrationDate"));
         return customer;
          }
-
 }

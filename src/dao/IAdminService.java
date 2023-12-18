@@ -1,15 +1,15 @@
 package dao;
 import entity.Admin;
-
+import exception.AdminNotFoundException;
 public interface IAdminService {
 
-	Admin getAdminById(int adminId);
+	Admin getAdminById(int adminId) throws AdminNotFoundException;
 
-	Admin getAdminByUsername(String username);
+	Admin getAdminByUsername(String username) throws AdminNotFoundException;
 
 	boolean registerAdmin(Admin admin);
 
-	Admin updateAdmin(String adminData);
+	//boolean updateAdmin(String adminData);
 
 	boolean deleteAdmin(int adminId);
 }
