@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 public  class VehicleService implements IVehicleService {
  
     private static final String SELECT_VEHICLE_BY_ID = "SELECT * FROM vehicle WHERE vehicleId=?";
-    private static final String GET_AVAILABLE_VEHICLES = "SELECT * FROM vehicle WHERE availability = true";
+    private static final String GET_AVAILABLE_VEHICLES = "SELECT count(vehicleId) FROM vehicle WHERE availability = true";
     private static final String INSERT_VEHICLE = "INSERT INTO vehicle(vehicleId, model, make,yearr,color,registration_number,availability,dailyrate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     //private static final String UPDATE_VEHICLE = "UPDATE vehicle SET username=?, password=? WHERE adminId=?";
     private static final String DELETE_VEHICLE = "DELETE FROM vehicle WHERE vehicleId=?";

@@ -61,8 +61,8 @@ public class ReservationService implements IReservationService {
             preparedStatement.setInt(1, reservation.getReservationID());
             preparedStatement.setInt(2, reservation.getCustomerID());
             preparedStatement.setInt(3, reservation.getVehicleID());
-            preparedStatement.setDate(4, (Date) reservation.getStartDate());
-            preparedStatement.setDate(5, (Date) reservation.getEndDate());
+            preparedStatement.setString(4, reservation.getStartDate());
+            preparedStatement.setString(5, reservation.getEndDate());
             preparedStatement.setDouble(6, reservation.getTotalCost());
             preparedStatement.setString(7, reservation.getStatus());
             preparedStatement.executeUpdate();
@@ -103,8 +103,8 @@ public class ReservationService implements IReservationService {
         reservation.setVehicleID(resultSet.getInt("reservationId"));
         reservation.setCustomerID(resultSet.getInt("customerId"));
         reservation.setVehicleID(resultSet.getInt("vehicleId"));
-        reservation.setStartDate(resultSet.getDate("startDate"));
-        reservation.setEndDate(resultSet.getDate("endDate"));
+        reservation.setStartDate(resultSet.getString("startDate"));
+        reservation.setEndDate(resultSet.getString("endDate"));
         reservation.setTotalCost(resultSet.getDouble("totalCost"));
         reservation.setStatus(resultSet.getString("current_status"));
         return reservation;

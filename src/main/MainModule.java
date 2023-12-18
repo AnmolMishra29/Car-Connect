@@ -8,8 +8,8 @@ import entity.Vehicle;
 import entity.Customer;
 import entity.Admin;
 import entity.Reservation;
-import exception.InvalidInputException;
-import java.util.Date;
+//import exception.InvalidInputException;
+//import java.util.Date;
 import java.util.Scanner;
 
 public class MainModule {
@@ -70,7 +70,7 @@ public class MainModule {
                     }
                     break;
                 case 2:
-                    
+                    System.out.println("Get Available.");
                     break;
                 case 3:
                     System.out.println("Enter Vehicle ID to delete:");
@@ -103,7 +103,7 @@ public class MainModule {
                     System.out.println("Enter Password:");
                     String password = scanner.next();
                     System.out.println("Enter Registration Date:");
-                    Date registrationDate = scanner.nextDate();
+                    String registrationDate = scanner.next();
 
                     Customer customerToInsert = new Customer(customerID, firstName,lastName,email,phoneNumber,address,username, password, registrationDate);
                     boolean insertcustomerSuccess = customer.registerCustomer(customerToInsert);
@@ -115,6 +115,15 @@ public class MainModule {
                     }
                     break;
                 case 5:
+                    System.out.println("Enter Customer ID to retrieve:");
+                    int retrieveCustomerId = scanner.nextInt();
+
+                    try {
+                        Customer retrievedCustomer = customer.getCustomerById(retrieveCustomerId );
+                        System.out.println("Retrieved Customer: " + retrievedCustomer);
+                    } catch (Exception e) {
+                        System.out.println("Customer not found or an error occurred: " + e.getMessage());
+                    }
                     break;
                 case 6:
                     System.out.println("Enter Customer ID to delete:");
@@ -147,7 +156,7 @@ public class MainModule {
                     System.out.println("Enter Role:");
                     String role = scanner.next();
                     System.out.println("Enter Join Date:");
-                    Date joinDate = scanner.nextDate();
+                    String joinDate = scanner.next();
 
                     Admin adminToInsert = new Admin(adminID, AdfirstName,AdlastName,Ademail,AdphoneNumber,Adusername, Adpassword, role, joinDate);
                     boolean insertAdminSuccess = admin.registerAdmin(adminToInsert);
@@ -158,9 +167,17 @@ public class MainModule {
                         System.out.println("Failed to add Admin.");
                     }
                     break;
-//                case 8:
-//                    searchAdminByID(vehicleService);
-//                    break;
+                case 8:
+                    System.out.println("Enter Admin ID to retrieve:");
+                    int retrieveAdminId = scanner.nextInt();
+
+                    try {
+                        Admin retrievedAdmin = admin.getAdminById(retrieveAdminId );
+                        System.out.println("Retrieved Admin: " + retrievedAdmin);
+                    } catch (Exception e) {
+                        System.out.println("Admin not found or an error occurred: " + e.getMessage());
+                    }
+                    break;
                 case 9:
                     System.out.println("Enter Admin ID to delete:");
                     int deleteAdmin = scanner.nextInt();
@@ -182,9 +199,9 @@ public class MainModule {
                     System.out.println("Enter Vehicle ID:");
                     int revehicleID = scanner.nextInt();
                     System.out.println("Enter Start Date:");
-                    date startDate = scanner.nextDate();
+                    String startDate = scanner.next();
                     System.out.println("Enter End Date:");
-                    date endDate = scanner.nextDate();  
+                    String endDate = scanner.next();  
                     System.out.println("Enter TotalCost:");
                     double totalCost  = scanner.nextDouble();
                     System.out.println("Enter Status:");
@@ -225,77 +242,3 @@ public class MainModule {
     }
     
 } 
-//    private static void addVehicle(VehicleService vehicleService, Scanner scanner) {
-//        // Collect vehicle details from the user
-//        System.out.print("Enter Model: ");
-//        String model = scanner.nextLine();
-//        System.out.print("Enter Make: ");
-//        String make = scanner.nextLine();
-//        // ... (collect other details)
-//
-//        // Create a Vehicle object
-//        Vehicle vehicle = new Vehicle();
-//        vehicle.setModel(model);
-//        vehicle.setMake(make);
-//        // ... (set other details)
-//
-//        try {
-//            // Call the service to add the vehicle
-//            vehicleService.addVehicle(vehicle);
-//            System.out.println("Vehicle added successfully!");
-//        } catch (InvalidInputException e) {
-//            System.out.println("Error: " + e.getMessage());
-//        }
-//    }
-//    
-//    
-//    private static void getAvaibleVehicle(){
-//        
-//    }
-//    
-//    private static void deleteVehicle(){
-//        
-//    }
-//    
-//    private static void addCustomer(Customer customer){
-//        
-//    }
-//    
-//    private static void searchCustomerByID(){
-//        
-//    }
-//    
-//    private static void deleteCustomer(int customerId){
-//       System.out.println("Enter Customer ID to delete:");
-//            int CustomerID = scanner.nextInt();
-//
-//            boolean deleteSuccess = customer.deleteCustomer(CustomerID);
-//
-//            if (deleteSuccess) {
-//                System.out.println("Policy deleted successfully.");
-//            } else {
-//                System.out.println("Failed to delete policy.");
-//            }
-//                    
-//    }
-//    
-//    private static void addAdmin(){
-//        
-//    }
-//    
-//    private static void searchAdminByID(){
-//        
-//    }
-//    
-//    private static void deleteAdmin(){
-//        
-//    }
-//    
-//    private static void createReservation(){
-//        
-//    }
-//    
-//    private static void cancelReservation(){
-//        
-//    }
-//}

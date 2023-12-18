@@ -1,20 +1,20 @@
 package entity;
-import java.util.Date;
+//import java.util.Date;
 
 public class Reservation {
 
 	private int reservationID;
 	private int customerID;
 	private int vehicleID;
-	private Date startDate;
-	private Date endDate;
+	private String startDate;
+	private String endDate;
 	private double totalCost;
 	private String status;
 
 	public Reservation() {
 	}
 
-	public Reservation(int reservationID, int customerID, int vehicleID, Date startDate, Date endDate, double totalCost,
+	public Reservation(int reservationID, int customerID, int vehicleID, String startDate, String endDate, double totalCost,
 			String status) {
 		this.reservationID = reservationID;
 		this.customerID = customerID;
@@ -51,19 +51,19 @@ public class Reservation {
 		this.vehicleID = vehicleID;
 	}
 
-	public Date getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 

@@ -10,13 +10,13 @@ public class Admin {
 	private String username;
 	private String password;
 	private String role;
-	private Date joinDate;
+	private String joinDate;
 
 	public Admin() {
 	}
 
 	public Admin(int adminID, String firstName, String lastName, String email, String phoneNumber, String username,
-			String password, String role, Date joinDate) {
+			String password, String role, String joinDate) {
 		this.adminID = adminID;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -92,11 +92,11 @@ public class Admin {
 		this.role = role;
 	}
 
-	public Date getJoinDate() {
+	public String getJoinDate() {
 		return joinDate;
 	}
 
-	public void setJoinDate(Date joinDate) {
+	public void setJoinDate(String joinDate) {
 		this.joinDate = joinDate;
 	}
 

@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date;
+//import java.sql.Date;
 import exception.AdminNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -76,7 +76,7 @@ public class AdminService implements IAdminService {
             preparedStatement.setString(6, admin.getUsername());
             preparedStatement.setString(7, admin.getPassword());
             preparedStatement.setString(8, admin.getRole());
-            preparedStatement.setDate(9, (Date) admin.getJoinDate());
+            preparedStatement.setString(9, admin.getJoinDate());
             preparedStatement.executeUpdate();
             
             int rowsAffected = preparedStatement.executeUpdate();
@@ -120,7 +120,7 @@ public class AdminService implements IAdminService {
         admin.setUsername(resultSet.getString("username"));
         admin.setPassword(resultSet.getString("adminPassword"));
         admin.setRole(resultSet.getString("adminRole"));
-        admin.setJoinDate(resultSet.getDate("joinDate"));
+        admin.setJoinDate(resultSet.getString("joinDate"));
         return admin;
          }
 
