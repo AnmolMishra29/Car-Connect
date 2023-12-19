@@ -90,4 +90,17 @@ public class Vehicle {
 	public void setDailyRate(double dailyRate) {
 		this.dailyRate = dailyRate;
 	}
+        
+        @Override
+    public String toString() {
+        return 
+                "CustomerID: " + vehicleID +
+                "\nFirstName: " + model +
+                "\nlastName: " + make +
+                "\nemail: " + year +
+                "\nPhoneNumber: " + color +
+                "\nAddress: " + registrationNumber +
+                "\nusername: " + availability +
+                "\nPassword: " + dailyRate ;
+    }
 }

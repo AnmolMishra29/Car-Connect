@@ -50,7 +50,7 @@ public class AdminService implements IAdminService {
             }
                 }
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             throw new RuntimeException("An error occurred while retrieving vehicle from the database.", e);  
         }
 	}
@@ -75,7 +75,7 @@ public class AdminService implements IAdminService {
             return rowsAffected > 0;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return false;
         }
 	}

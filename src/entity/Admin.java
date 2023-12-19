@@ -1,5 +1,5 @@
 package entity;
-import java.util.Date;
+//import java.util.Date;
 public class Admin {
 
 	private int adminID;
@@ -99,6 +99,20 @@ public class Admin {
 	public void setJoinDate(String joinDate) {
 		this.joinDate = joinDate;
 	}
+        
+        @Override
+        public String toString() {
+        return 
+                "AdminID: " + adminID +
+                "\nFirstName: " + firstName +
+                "\nlastName: " + lastName +
+                "\nemail: " + email +
+                "\nPhoneNumber: " + phoneNumber +
+                "\nusername: " + username +
+                "\nPassword: " + password +
+                "\nRole: " + role +
+                "\nJoinDate: " + joinDate ;
+    }
 
 	public boolean authenticate(String enteredPassword) {
 		return this.password.equals(enteredPassword);

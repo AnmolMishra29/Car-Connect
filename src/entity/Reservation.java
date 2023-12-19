@@ -82,6 +82,18 @@ public class Reservation {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+        
+        @Override
+    public String toString() {
+        return 
+                "CustomerID: " + reservationID +
+                "\nCustomerId: " + customerID +
+                "\nVehicleID: " + vehicleID +
+                "\nStartDate: " + startDate +
+                "\nEndDate: " + endDate +
+                "\nTotalCost: " + totalCost+
+                "\nStatus: " + status ;
+    }
 
 	public void calculateTotalCost() {
 		// total cost based on the duration of the reservation, daily rate.

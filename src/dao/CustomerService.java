@@ -17,7 +17,7 @@ public class CustomerService implements ICustomerService {
 	@Override
 	public Customer getCustomerById(int customerId) throws CustomerNotFoundException{
             try(Connection connection = DButil.getConnection()){
-              String SELECT_CUSTOMER_BY_ID = "SELECT * FROM customer WHERE adminId=?";  
+              String SELECT_CUSTOMER_BY_ID = "SELECT * FROM customer WHERE customerId=?";  
 	    try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CUSTOMER_BY_ID)) {
             preparedStatement.setInt(1, customerId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -29,8 +29,8 @@ public class CustomerService implements ICustomerService {
             }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException("An error occurred while retrieving vehicle from the database.", e);
+            //e.printStackTrace();
+            throw new RuntimeException("An error occurred while retrieving customer from the database.", e);
         }
 	}
 
@@ -50,7 +50,7 @@ public class CustomerService implements ICustomerService {
             }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             throw new RuntimeException("An error occurred while retrieving customer from the database.", e);
         }
 	}
@@ -75,7 +75,7 @@ public class CustomerService implements ICustomerService {
             return rowsAffected > 0;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return false;
         }
 	}
@@ -100,8 +100,7 @@ public class CustomerService implements ICustomerService {
                 return rowsAffected > 0;
             }
         } catch (SQLException e) {
-            // Handle exceptions
-            e.printStackTrace();
+            //e.printStackTrace();
             return false;
         }
 	}

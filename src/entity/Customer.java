@@ -103,6 +103,20 @@ public class Customer {
 		this.registrationDate = registrationDate;
 	}
 
+        @Override
+    public String toString() {
+        return 
+                "CustomerID: " + customerID +
+                "\nFirstName: " + firstName +
+                "\nlastName: " + lastName +
+                "\nemail: " + email +
+                "\nPhoneNumber: " + phoneNumber +
+                "\nAddress: " + address +
+                "\nusername: " + username +
+                "\nPassword: " + password +
+                "\nRegistrationDate: " + registrationDate ;
+    }
+        
 	public boolean authenticate(String enteredPassword) {
 		return this.password.equals(enteredPassword);
 	}
